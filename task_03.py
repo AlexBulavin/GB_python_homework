@@ -16,8 +16,9 @@ print('Задание 3'.upper())
 n = input('Введите целое положительное число n: ')
 if n.isnumeric() and (int(n) > 0):
     n = n
-    nn = int(n)*2
-    nnn = int(n)*3
-    print(f'n + n*n + n*n*n = {n + str(nn) + str(nnn)}')
+    nn = n + n
+    nnn = nn + n
+    result = int(n) + int(nn) + int(nnn)
+    print(f'n + n*n + n*n*n = {result}')
 else:
     print(f"Ошибка, ввода!")
