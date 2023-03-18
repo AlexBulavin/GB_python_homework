@@ -14,20 +14,23 @@ X в массиве A[1..N].
     -> 1
 
 '''
-from library import TypicalMethods
+from library import TypicalMethods as tm  # Написали вспомогательную либу
+# типовых методов и из неё делаем ввод данных
+
+import os
+# Очищаем консоль
+os.system('clear')
 
 # Просим пользователя ввести количество элементов массива
 
-arr_size = TypicalMethods.input_single_int(f'Введите количество'
-                                           f' элементов массива: ')
-data_list = []
-for i in range(arr_size):
-    data_list.append(TypicalMethods.input_single_int(f'Введите '
-                                                     f'{i+1} элемент списка'
-                                                     f' из {arr_size}: '))
-x_counting = TypicalMethods.input_single_int(f'Введите искомое число: ')
+arr_size = tm.input_single_int(f'Введите количество'
+                               f' элементов массива: ')
+data_list = []  # Создали пустой список
+for i in range(arr_size):  # Заполняем список вводимыми
+    # пользователем положительными интами
+    data_list.append(tm.input_single_int(f'Введите {i + 1} элемент списка'
+                                         f' из {arr_size}: '))
+x_counting = tm.input_single_int(f'Введите искомое число: ')
 
 print(f'Число {x_counting} встречается в списке {data_list.count(x_counting)}'
       f' раз')
-
-
