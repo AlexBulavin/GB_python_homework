@@ -26,6 +26,13 @@ import os
 
 # Очищаем консоль
 os.system('clear')
+
+
+def dividing(*args):
+    print(f'{first_num} / {second_num} = '
+          f'{(first_num / second_num) :.2f}')
+
+
 second_num = 0
 first_num = tm.input_any_int(f"Введите числитель: ")
 while not second_num:
@@ -34,8 +41,7 @@ while not second_num:
         if second_num == 0:
             raise NewException()
         else:
-            print(f'{first_num} / {second_num} = '
-                  f'{(first_num / second_num) :.2f}')
+            dividing(first_num, second_num)
 
     except NewException:
         print(f"{bcolors.RED}Вы что? Пытаетесь делить на 0!\n"
