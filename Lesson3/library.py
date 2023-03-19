@@ -22,6 +22,12 @@ class bcolors:
     ENDC = '\033[55m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+    RED = '\033[91m'
+    CYAN = '\033[96m'
+    WHITE = '\033[97m'
+    GREY = '\033[90m'
+    BLACK = '\033[90m'
+    DEFAULT = '\033[99m'
 
 
 class TypicalMethods:
@@ -70,6 +76,40 @@ class TypicalMethods:
                 print(NOT_INT)
             finally:
                 pass
+
+    def input_any_int(self):
+        """
+        Метод ввода целого числа
+        На вход получает текст для объяснения пользователю какое число нужно
+        ввести.
+        Обрабатывает некорректный ввод текста/символов, отрицательных чисел
+        :return:
+        Возвращает целое положительное число
+        """
+
+        flag_input_ok = False
+        while not flag_input_ok:
+            print(bcolors.OKBLUE)  # Задали цвет текста в консоли
+            try:
+                if (number_inputs := input(
+                        f'{TypicalMethods.output_dynamic_string(self)}'
+                )).isnumeric():
+                    flag_input_ok = True
+                    return int(number_inputs)
+                    print(bcolors.ENDC)  # Возвратили цвет текста к исходному
+                else:
+                    print(NOT_INT)
+            except ValueError or TypeError:
+                print(NOT_INT)
+            finally:
+                pass
+
+
+class NewException(Exception):
+    pass
+    # if Exception == 0:
+    #     print(f"Вы что? Пытаетесь делить на 0! Введено нулевое "
+    #           f"значение, введите знаменатель не равный нолю: ")
 
 
 # Also add symbol by it ASCII code chr(9610) - marker
