@@ -28,11 +28,13 @@ class TypicalMethods:
             time.sleep(1 / len(self))
             sys.stdout.write(self[i])
             sys.stdout.flush()
+
             if not sys.platform.startswith('darwin'):
                 frequency = random.randint(37, 32767)
                 duration = 100  # миллисекунды
                 sys.stdout.write('\a')
                 sys.stdout.flush()
+
 
     def input_single_int(self):
         """
@@ -46,12 +48,14 @@ class TypicalMethods:
 
         flag_input_ok = False
         while not flag_input_ok:
+            print(bcolors.OKBLUE)
             try:
-                if (number_inputs := int(input(f'{bcolors.OKBLUE}'
-                            f'{TypicalMethods.output_dynamic_string(self)} '
-                            f'{bcolors.ENDC}'))) > 0:
+                if (number_inputs := int(input(
+                                f'{TypicalMethods.output_dynamic_string(self)}'
+                                ))) > 0:
                     flag_input_ok = True
                     return number_inputs
+                    print(bcolors.ENDC)
                 else:
                     print(NOT_INT_POSITIVE)
             except ValueError or TypeError:

@@ -19,19 +19,40 @@ os.system('clear')
 
 
 def seasons_list():
-    month_number = tm.input_single_int(f'{bcolors.OKBLUE}'
-           f'{TypicalMethods.input_single_int(f"Введите номер месяц:")}'
-           f'{bcolors.ENDC}')
-
-    match month_number:
-        case 1, 2, 12:
-            print(SEASONS_LIST[0])
-        case 3, 4, 5:
-            print(SEASONS_LIST[1])
-        case 6, 7, 8:
-            print(SEASONS_LIST[2])
-        case 9, 10, 11:
-            print(SEASONS_LIST[3])
-
+    month_number = tm.input_single_int(f"Введите номер месяца: ")
+    month_number = month_number % 12 # Обработка чисел больше 12
+    if 1 <= month_number:
+        match month_number:
+            case 1:
+                print(SEASONS_LIST[0])
+            case 2:
+                print(SEASONS_LIST[0])
+            case 12:
+                print(SEASONS_LIST[0])
+            case 3:
+                print(SEASONS_LIST[1])
+            case 4:
+                print(SEASONS_LIST[1])
+            case 5:
+                print(SEASONS_LIST[1])
+            case 6:
+                print(SEASONS_LIST[2])
+            case 7:
+                print(SEASONS_LIST[2])
+            case 8:
+                print(SEASONS_LIST[2])
+            case 9:
+                print(SEASONS_LIST[3])
+            case 10:
+                print(SEASONS_LIST[3])
+            case 11:
+                print(SEASONS_LIST[3])
 
 seasons_list()
+
+
+def seasons_dict():
+    print(SEASONS_DICT[tm.input_single_int(f"Введите номер месяца: ") % 12]) # % 12 = Обработка чисел больше 12
+
+
+seasons_dict()
