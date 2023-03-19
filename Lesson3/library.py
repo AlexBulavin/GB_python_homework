@@ -50,22 +50,22 @@ class TypicalMethods:
                 sys.stdout.write('\a')
                 sys.stdout.flush()
 
-'''
-    // Метод для вывода бегущей строкой 
-     /// < summary > Метод для вывода бегущей строкой < / summary >
-    // / < param
-    name = "text" > Текст который нужно вывести в консоль < / param >
-    public static void OutputDynamicString(string text)
-    {
-        ForegroundColor = ConsoleColor.Blue;
-    for (int i = 0; i < text.Length; i++)
-    {
-        Thread.Sleep(1000 / text.Length);
-    Write(text[i]);
-    if (!OperatingSystem.IsMacOS()) Beep(Random.Shared.Next(37, 32767), 100);
-    }
-    ResetColor();
-    }'''
+    '''
+        // Метод для вывода бегущей строкой 
+         /// < summary > Метод для вывода бегущей строкой < / summary >
+        // / < param
+        name = "text" > Текст который нужно вывести в консоль < / param >
+        public static void OutputDynamicString(string text)
+        {
+            ForegroundColor = ConsoleColor.Blue;
+        for (int i = 0; i < text.Length; i++)
+        {
+            Thread.Sleep(1000 / text.Length);
+        Write(text[i]);
+        if (!OperatingSystem.IsMacOS()) Beep(Random.Shared.Next(37, 32767), 100);
+        }
+        ResetColor();
+        }'''
 
     def input_single_int(self):
         """
