@@ -30,9 +30,16 @@ Q, Z – 10 очков.
 '''
 from strings_const import *
 from library import bcolors
+import os
 
-word = input(f'{bcolors.OKBLUE}{STR_INPUT}{bcolors.ENDC}')
+# Очищаем консоль
+os.system('clear')
 
-# TODO: Сделать парсер ценности букв
-# TODO: Сделать цикл для сравнения или каким-то магическим образом через
-#  словари
+origin_word = input(f'{bcolors.OKBLUE}{STR_INPUT}{bcolors.ENDC}')
+upper_word = origin_word.upper()
+counter = 0
+
+for i in upper_word:
+    counter += CYR_MAP.get(i, 0) + LATIN_MAP.get(i, 0)
+
+print(f'Слово {origin_word} стоит {counter} баллов')
