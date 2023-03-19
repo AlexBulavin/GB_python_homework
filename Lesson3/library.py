@@ -4,7 +4,9 @@ __author__ = 'Alex Bulavin'
 '''
 
 from strings_const import *  # Импортируем набор текстовых констант
-
+import time
+import random
+import sys
 
 
 # Add class for coloring console text
@@ -21,6 +23,17 @@ class bcolors:
 
 class TypicalMethods:
 
+    def output_dynamic_string(self):
+        for i in range(len(self)):
+            time.sleep(1 / len(self))
+            sys.stdout.write(self[i])
+            sys.stdout.flush()
+            if not sys.platform.startswith('darwin'):
+                frequency = random.randint(37, 32767)
+                duration = 100  # миллисекунды
+                sys.stdout.write('\a')
+                sys.stdout.flush()
+
     def input_single_int(self):
         """
         Метод ввода целого положительного числа
@@ -34,8 +47,9 @@ class TypicalMethods:
         flag_input_ok = False
         while not flag_input_ok:
             try:
-                if (number_inputs := int(input(f'{bcolors.OKBLUE}{self}'
-                                               f'{bcolors.ENDC}'))) > 0:
+                if (number_inputs := int(input(f'{bcolors.OKBLUE}'
+                            f'{TypicalMethods.output_dynamic_string(self)} '
+                            f'{bcolors.ENDC}'))) > 0:
                     flag_input_ok = True
                     return number_inputs
                 else:
