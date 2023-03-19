@@ -84,9 +84,9 @@ SEASONS_DICT = {
     11: "Осень",
 }
 
-USER_FIRST_NAME_REQUEST = "Введите имя пользователя"
-USER_LAST_NAME_REQUEST = "Введите фамилию пользователя"
-USER_BIRTH_YEAR_REQUEST = "Введите год рождения пользователя"
-USER_LIVING_CITY = "Введите город проживания пользователя"
-USER_EMAIL = "Введите e-mail пользователя"
-USER_PHONE1 = "Введите телефонный номер пользователя"
+USER_FIRST_NAME_REQUEST = "Введите имя пользователя: "
+USER_LAST_NAME_REQUEST = "Введите фамилию пользователя: "
+USER_BIRTH_YEAR_REQUEST = "Введите год рождения пользователя: "
+USER_LIVING_CITY = "Введите город проживания пользователя: "
+USER_EMAIL = "Введите e-mail пользователя: "
+USER_PHONE1 = "Введите телефонный номер пользователя: "
