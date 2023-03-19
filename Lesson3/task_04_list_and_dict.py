@@ -28,21 +28,23 @@ def my_func_1(first_num, second_num, third_num):
     else:
         sum_max = second_num + third_num
 
-    print(f'Сумма наибольших элементов равна {sum_max}')
+    tm.output_dynamic_string(f'Сумма наибольших элементов равна ')
+    print(sum_max)
 
 
 # ---------------- Вариант 2 ------------------
 def my_func_2(data_list):
-    print(f'Сумма наибольших элементов равна {data_list[0] + data_list[1]}')
+    tm.output_dynamic_string(f'Сумма наибольших элементов равна ')
+    print(f'{data_list[0] + data_list[1]}')
 
 
 print(bcolors.OKBLUE)  # Задали цвет текста в консоли
 data_list = []
-first_num = tm.input_any_int(f'Введите первое число')
+first_num = tm.input_any_int(f"Введите первое число: ")
 data_list.append(first_num)
-second_num = tm.input_any_int(f'Введите второе число')
+second_num = tm.input_any_int(f"Введите второе число: ")
 data_list.append(second_num)
-third_num = tm.input_any_int(f'Введите третье число')
+third_num = tm.input_any_int(f"Введите третье число: ")
 data_list.append(third_num)
 
 my_func_1(first_num, second_num, third_num)

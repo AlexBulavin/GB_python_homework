@@ -39,11 +39,10 @@ class TypicalMethods:
         :return:
         """
         for i in range(len(self)):
-            if self is not None:
-                time.sleep(1 / len(self))
+            if self[i] is not None:
                 sys.stdout.write(self[i])
                 sys.stdout.flush()
-
+                time.sleep(1 / (1.5*len(self)))
             if not sys.platform.startswith('darwin'):  # Для Windows
                 frequency = random.randint(37, 32767)
                 duration = 100  # миллисекунды
@@ -66,6 +65,12 @@ class TypicalMethods:
         }
         ResetColor();
         }'''
+    def output_dynamic_string_v2(self):
+        for i in range(len(self)):
+            print(f'{self[i]}', end="")
+            time.sleep(1 / len(self))
+            sys.stdout.flush()
+
 
     def input_single_int(self):
         """
@@ -81,12 +86,11 @@ class TypicalMethods:
         while not flag_input_ok:
             print(bcolors.OKBLUE)  # Задали цвет текста в консоли
             try:
-                if (number_inputs := int(input(
-                        f'{TypicalMethods.output_dynamic_string(self)}'
-                ))) > 0:
+                TypicalMethods.output_dynamic_string(self)
+                if (number_inputs := int(input())) > 0:
                     flag_input_ok = True
-                    return number_inputs
                     print(bcolors.ENDC)  # Возвратили цвет текста к исходному
+                    return number_inputs
                 else:
                     print(NOT_INT_POSITIVE)
             except ValueError or TypeError:
@@ -108,19 +112,17 @@ class TypicalMethods:
         while not flag_input_ok:
             print(bcolors.OKBLUE)  # Задали цвет текста в консоли
             try:
-                if (number_inputs := input(
-                        f'{TypicalMethods.output_dynamic_string(self)}'
-                )).isnumeric():
+                TypicalMethods.output_dynamic_string(self)
+                if (number_inputs := input()).isnumeric():
                     flag_input_ok = True
                     return int(number_inputs)
-                    print(bcolors.ENDC)  # Возвратили цвет текста к исходному
                 else:
                     print(NOT_INT)
             except ValueError or TypeError:
                 print(NOT_INT)
             finally:
                 pass
-
+        print(bcolors.ENDC)  # Возвратили цвет текста к исходному
 
 class NewException(Exception):
     pass
