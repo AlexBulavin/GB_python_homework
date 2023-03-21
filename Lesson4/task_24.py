@@ -14,11 +14,6 @@ __author__ = 'Alex Bulavin'
 заданной во входном файле грядки.
 """
 
-from ..Lesson3.strings_const import *
-from ..Lesson3.library import TypicalMethods as tm
-from ..Lesson3.library import bcolors
-from ..Lesson3.library import NewException
-import os
 from library import TypicalMethods as tm
 
 import os
@@ -54,7 +49,8 @@ sum_berries_max = 0
 sum_berries_tripple = 0
 max_index = 0
 
-# TODO: Кольцевой список - основная логика. Проход по всем тройкам.
+# Кольцевой список - основная логика. Проход по всем тройкам.
+# неплохо бы подумать и оптимизировать
 for i in range(bush_amount):
     sum_berries_tripple += ridge_list[i]
     if i < bush_amount - 1:
@@ -70,14 +66,14 @@ for i in range(bush_amount):
     if i == bush_amount:
         sum_berries_tripple += ridge_list[0]
         sum_berries_tripple += ridge_list[1]
-        if debug_mode: print(
-            f'sum_berries_tripple {i} = {sum_berries_tripple}')
+        if debug_mode:
+            print(f'sum_berries_tripple {i} = {sum_berries_tripple}')
     if sum_berries_tripple > sum_berries_max:
         sum_berries_max = sum_berries_tripple
         max_index = i
 
     sum_berries_tripple = 0
 
-# TODO: Иллюстрация решения
+# Иллюстрация решения
 print(*ridge_list)
 print(f'Максимальная троица от {max_index + 1} куста: {sum_berries_max}')
