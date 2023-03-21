@@ -134,6 +134,33 @@ class TypicalMethods:
                                       f'элемент из {n_elements} для'
                                       f' {self_name} множества: '))
         return self
+
+    def list_fill_random_int(self, n_elements, min_int, max_int, min_included,
+                            max_included, self_name, debug_mode):
+        # self, n_elements, min_int, max_int,
+        # min_included, min_included, self_name, debug_mode
+        """
+        Заполняет структуру на входе в параметре self случайными интами в
+        диапазоне min_int - max_int
+        включая/исключая их (min_included/max_included = True/False)
+        :param n_elements: количество элементов структуры self,
+        например, множества, список
+        :return: возвращает структуру, заполненную случайными интами
+        """
+        for i in range(n_elements):
+            if min_included and max_included:
+                self.append(random.randint(min_int, max_int))
+            elif min_int and not max_included and max_included - \
+                    min_included > 1:
+                self.append(random.randint(min_int, max_int - 1))
+            elif not min_int and not max_included and max_included - \
+                    min_included > 2:
+                self.append(random.randint(min_int + 1, max_int - 1))
+            else:
+                if debug_mode:
+                    print(f'Введённые параметры min и '
+                          f'max для {self_name} должны отличаться больше')
+        return self
 class NewException(Exception):
     pass
     # if Exception == 0:
