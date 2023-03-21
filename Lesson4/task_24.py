@@ -14,7 +14,7 @@ __author__ = 'Alex Bulavin'
 заданной во входном файле грядки.
 """
 
-from library import TypicalMethods as tm
+from ..Lesson3.library import TypicalMethods as tm
 
 import os
 
@@ -24,7 +24,7 @@ os.system('clear')
 debug_mode = False
 
 bush_amount = 0
-# TODO: Рандомайзер заполнения
+# Рандомайзер заполнения
 # Делаем запрос количества кустов на грядке. Минимум 3 максимум 12
 # запрашиваем у пользователя
 while 3 > bush_amount or bush_amount > 12:
@@ -35,7 +35,7 @@ while 3 > bush_amount or bush_amount > 12:
             f'Введённое число кустов на грядке меньше 3 или'
             f'больше 12. Повторите ввод.')
 
-# TODO: Делаем во внешней библиотеке модуль рандомного заполнения списка
+# Делаем во внешней библиотеке модуль рандомного заполнения списка
 # и заполняем список
 # self, n_elements, min_int, max_int,
 # min_included, min_included, self_name, debug_mode
