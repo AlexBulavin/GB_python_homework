@@ -147,9 +147,21 @@ class TypicalMethods:
         например, множества, список
         :return: возвращает структуру, заполненную случайными интами
         """
+    # Ниже приведен генератор списка. Проблема в том, что он выдаёт пустой
+    # список, если условие не выполняется
+    # self = [random.randint(min_int, max_int) for i in range(n_elements) if
+    #         min_included and max_included]
+    # self = [random.randint(min_int, max_int - 1) for i in range(n_elements)
+    #         if min_int and not max_included and max_included -
+    #         min_included > 1]
+    # self = [random.randint(min_int + 1, max_int - 1) for i in
+    #         range(n_elements) if not min_int and not max_included and
+    #         max_included - min_included > 2]
+        # 
         for i in range(n_elements):
             if min_included and max_included:
                 self.append(random.randint(min_int, max_int))
+
             elif min_int and not max_included and max_included - \
                     min_included > 1:
                 self.append(random.randint(min_int, max_int - 1))
