@@ -6,10 +6,13 @@ __author__ = 'Alex Bulavin'
 Пользователь вводит 2 числа. n - кол-во элементов первого множества. m - кол-во
 элементов второго множества. Затем пользователь вводит сами элементы множеств.
 '''
-from ..Lesson3.strings_const import *
+
+from .lesson3.library import TypicalMethods as tm
+# from ..lesson3 import strings_const
 from ..Lesson3.library import TypicalMethods as tm
-from ..Lesson3.library import bcolors
-from ..Lesson3.library import NewException
+from library import bcolors
+from library import NewException
+
 import os
 
 # Очищаем консоль

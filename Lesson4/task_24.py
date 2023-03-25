@@ -14,7 +14,7 @@ __author__ = 'Alex Bulavin'
 заданной во входном файле грядки.
 """
 
-from ..Lesson3.library import TypicalMethods as tm
+from library import TypicalMethods as tm
 
 import os
 
