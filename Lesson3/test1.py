@@ -26,7 +26,7 @@ while 3 > bush_amount or bush_amount > 12:
 # self, n_elements, min_int, max_int,
 # min_included, min_included, self_name, debug_mode
 ridge_list = []
-tm.list_fill_random_int(ridge_list, bush_amount, 3, 12, True, True,
+tm.list_fill_random_int(ridge_list, bush_amount, 3, 6, True, True,
                         "ridge_list", debug_mode)
 bush_amount -= 1
 sum_berries_max = 0
@@ -38,66 +38,97 @@ alt_max_index = 0
 repeats = 100000
 alt_time = 0
 main_time = 0
+
+
 # Кольцевой список - основная логика. Проход по всем тройкам.
 
+def main_algorithm():
+    global sum_berries_tripple, sum_berries_max, max_index, ridge_list, i
+    sum_berries_tripple = 0
+
+    if debug_mode:
+        print(f"Main algorithm ")
+    sum_berries_tripple += ridge_list[i]
+    if i < bush_amount - 1:
+        sum_berries_tripple += ridge_list[i + 1]
+        sum_berries_tripple += ridge_list[i + 2]
+        if debug_mode: print(
+            f'sum_berries_tripple {i} = {sum_berries_tripple}')
+    if i == bush_amount - 1:
+        sum_berries_tripple += ridge_list[i + 1]
+        sum_berries_tripple += ridge_list[0]
+        if debug_mode: print(
+            f'sum_berries_tripple {i} = {sum_berries_tripple}')
+    if i == bush_amount:
+        sum_berries_tripple += ridge_list[0]
+        sum_berries_tripple += ridge_list[1]
+        if debug_mode: print(
+            f'sum_berries_tripple {i} = {sum_berries_tripple}')
+    if sum_berries_tripple > sum_berries_max:
+        sum_berries_max = sum_berries_tripple
+        max_index = i
+    return
+
+
+setup = "from __main__ import ridge_list, bush_amount, sum_berries_tripple, " \
+        "sum_berries_max, i, max_index, debug_mode, main_algorithm"
+
+
+def alt_algorithm_1():
+    global alt_sum_berries_tripple, alt_sum_berries_max, alt_max_index, \
+        debug_mode, ridge_list, i
+    alt_sum_berries_tripple = 0
+
+    if debug_mode:
+        print(f"Alt algorithm 1")
+    alt_sum_berries_tripple = ridge_list[i - 1] + ridge_list[i] + ridge_list[
+        i + 1]
+    if alt_sum_berries_tripple > alt_sum_berries_max:
+        alt_sum_berries_max = alt_sum_berries_tripple
+        alt_max_index = i - 1
+
+
+def alt_algorithm_2():
+    global alt_sum_berries_tripple, alt_sum_berries_max, alt_max_index, \
+        debug_mode, ridge_list, i
+    alt_sum_berries_tripple = 0
+
+    if debug_mode:
+        print(f"Alt algorithm 2")
+    alt_sum_berries_tripple = ridge_list[-2] + ridge_list[-1] + ridge_list[0]
+    if alt_sum_berries_tripple > alt_sum_berries_max:
+        alt_sum_berries_max = alt_sum_berries_tripple
+        alt_max_index = len(ridge_list) - 1
+
+
 for i in range(bush_amount):
-    main_time = timeit("""
-if debug_mode: print(f"Main algorithm ")
-sum_berries_tripple += ridge_list[i]
-if i < bush_amount - 1:
-    sum_berries_tripple += ridge_list[i + 1]
-    sum_berries_tripple += ridge_list[i + 2]
-    if debug_mode: print(
-        f'sum_berries_tripple {i} = {sum_berries_tripple}')
-if i == bush_amount - 1:
-    sum_berries_tripple += ridge_list[i + 1]
-    sum_berries_tripple += ridge_list[0]
-    if debug_mode: print(
-        f'sum_berries_tripple {i} = {sum_berries_tripple}')
-if i == bush_amount:
-    sum_berries_tripple += ridge_list[0]
-    sum_berries_tripple += ridge_list[1]
-    if debug_mode: print(
-        f'sum_berries_tripple {i} = {sum_berries_tripple}')
-if sum_berries_tripple > sum_berries_max:
-    sum_berries_max = sum_berries_tripple
-    max_index = i
-""", setup="from __main__ import ridge_list, bush_amount, "
-           "sum_berries_tripple, sum_berries_max, i, "
-           "max_index, debug_mode", number=repeats)
+    main_time = timeit(stmt="main_algorithm()", globals=globals(),
+                       number=repeats)
 
     # ---------------- Альтернативный алгоритм из эталонного решения
-    alt_time = timeit("""
-if debug_mode: print(f"Alt algorithm 1")
-alt_sum_berries_tripple = ridge_list[i - 1] + ridge_list[i] + ridge_list[
-    i + 1]
-if alt_sum_berries_tripple > alt_sum_berries_max:
-    alt_sum_berries_max = alt_sum_berries_tripple
-    alt_max_index = i
-    """, setup="from __main__ import ridge_list, bush_amount, "
-               "sum_berries_tripple, sum_berries_max, i, max_index, "
-               "debug_mode, alt_sum_berries_tripple, alt_sum_berries_max, "
-               "alt_max_index", number=repeats)
-alt_time += timeit("""
-if debug_mode: print(f"Alt algorithm 2")
-alt_sum_berries_max = ridge_list[-2] + ridge_list[-1] + ridge_list[0]
-if alt_sum_berries_tripple > alt_sum_berries_max:
-   alt_sum_berries_max = alt_sum_berries_tripple
-   alt_max_index = len(ridge_list) - 1
-""", globals=globals(), number=repeats)
+
+    alt_time = timeit(stmt="alt_algorithm_1()",
+                      globals=globals(), number=repeats)
+
+    alt_time += timeit(stmt="alt_algorithm_2()", globals=globals(),
+                       number=repeats)
 
 # Иллюстрация решения
 print(*ridge_list)
-print(f'Максимальная троица от {max_index + 1} куста: {sum_berries_max}')
+print(
+    f'Первая максимальная троица от {max_index + 1} куста: {sum_berries_max} '
+    f'ягод')
 print(main_time)
-print(f'Alt Максимальная троица от {max_index + 1} куста: '
-      f'{alt_sum_berries_max}') 
+print(f'Alt Первая максимальная троица от {alt_max_index} куста: '
+      f'{alt_sum_berries_max} ягод')
 print(alt_time)
 
+'''
 import re
 from collections import Counter
 
-find_words = re.findall(r'\w+', open('Lesson3/mtsury.txt', encoding='utf-8').read())
+find_words = re.findall(r'\w+',
+                        open('Lesson3/mtsury.txt', encoding='utf-8').read())
 
 
 def tf_calc(text):
@@ -110,7 +141,7 @@ def tf_calc(text):
     return tf_text
 
 
-print(tf_calc(find_words))  # -> {'Мой': 0.0003048780487804878,
+print(tf_calc(find_words)) '''  # -> {'Мой': 0.0003048780487804878,
 # 'дядя': 0.0006097560975609756,
 # 'самых': 0.0003048780487804878,
 # 'честных': 0.0003048780487804878,
