@@ -46,6 +46,9 @@ def input_operation(self=""):
 
 def print_result(number1=number1, number2=number2,
                  user_operation_input=user_operation_input):
+    number1 = int(number1)
+    number2 = int(number2)
+    user_operation_input = str(user_operation_input)
     if user_operation_input == "+":
         if debug_mode:
             print(f"number1 - {type(number1)}, number2 - {type(number2)},"

@@ -193,10 +193,10 @@ class TypicalMethods:
                 return int(number_inputs)
             else:
                 print(message)
-                TypicalMethods.recurse_input_any_int(self, message)
+                return TypicalMethods.recurse_input_any_int(self, message)
         except ValueError or TypeError:
             print(message)
-            TypicalMethods.recurse_input_any_int(self, message)
+            return TypicalMethods.recurse_input_any_int(self, message)
         finally:
             pass
         print(bcolors.ENDC)  # Возвратили цвет текста к исходному
