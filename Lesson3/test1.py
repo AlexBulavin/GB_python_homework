@@ -62,7 +62,6 @@ if i == bush_amount:
 if sum_berries_tripple > sum_berries_max:
     sum_berries_max = sum_berries_tripple
     max_index = i
-
 """, setup="from __main__ import ridge_list, bush_amount, "
            "sum_berries_tripple, sum_berries_max, i, "
            "max_index, debug_mode", number=repeats)
@@ -85,14 +84,12 @@ alt_sum_berries_max = ridge_list[-2] + ridge_list[-1] + ridge_list[0]
 if alt_sum_berries_tripple > alt_sum_berries_max:
    alt_sum_berries_max = alt_sum_berries_tripple
    alt_max_index = len(ridge_list) - 1
-""", setup="from __main__ import ridge_list, bush_amount, "
-           "sum_berries_tripple, sum_berries_max, i, "
-           "max_index, debug_mode, alt_sum_berries_tripple, "
-           "alt_sum_berries_max, alt_max_index", number=repeats)
+""", globals=globals(), number=repeats)
 
 # Иллюстрация решения
 print(*ridge_list)
 print(f'Максимальная троица от {max_index + 1} куста: {sum_berries_max}')
 print(main_time)
-print(f'Alt Максимальная троица от {max_index + 1} куста: {sum_berries_max}')
+print(f'Alt Максимальная троица от {max_index + 1} куста: '
+      f'{alt_sum_berries_max}') 
 print(alt_time)
