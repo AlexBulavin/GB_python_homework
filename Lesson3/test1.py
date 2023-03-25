@@ -62,16 +62,12 @@ def main_algorithm():
     if i == bush_amount:
         sum_berries_tripple += ridge_list[0]
         sum_berries_tripple += ridge_list[1]
-        if debug_mode: print(
-            f'sum_berries_tripple {i} = {sum_berries_tripple}')
+        if debug_mode:
+            print(f'sum_berries_tripple {i} = {sum_berries_tripple}')
     if sum_berries_tripple > sum_berries_max:
         sum_berries_max = sum_berries_tripple
         max_index = i
     return
-
-
-setup = "from __main__ import ridge_list, bush_amount, sum_berries_tripple, " \
-        "sum_berries_max, i, max_index, debug_mode, main_algorithm"
 
 
 def alt_algorithm_1():
@@ -85,12 +81,13 @@ def alt_algorithm_1():
         i + 1]
     if alt_sum_berries_tripple > alt_sum_berries_max:
         alt_sum_berries_max = alt_sum_berries_tripple
-        alt_max_index = i - 1
+        alt_max_index = i
+    return
 
 
 def alt_algorithm_2():
     global alt_sum_berries_tripple, alt_sum_berries_max, alt_max_index, \
-        debug_mode, ridge_list, i
+        debug_mode, ridge_list
     alt_sum_berries_tripple = 0
 
     if debug_mode:
@@ -99,6 +96,7 @@ def alt_algorithm_2():
     if alt_sum_berries_tripple > alt_sum_berries_max:
         alt_sum_berries_max = alt_sum_berries_tripple
         alt_max_index = len(ridge_list) - 1
+    return
 
 
 for i in range(bush_amount):
@@ -110,8 +108,7 @@ for i in range(bush_amount):
     alt_time = timeit(stmt="alt_algorithm_1()",
                       globals=globals(), number=repeats)
 
-    alt_time += timeit(stmt="alt_algorithm_2()", globals=globals(),
-                       number=repeats)
+alt_time += timeit(stmt="alt_algorithm_2()", globals=globals(), number=repeats)
 
 # Иллюстрация решения
 print(*ridge_list)
