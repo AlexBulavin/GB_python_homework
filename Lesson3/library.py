@@ -97,11 +97,12 @@ class TypicalMethods:
             finally:
                 pass
 
-    def input_any_int(self) -> int:
+    def input_any_int(self, message=NOT_INT) -> int:
         """
         Метод ввода целого числа
         На вход получает текст для объяснения пользователю какое число нужно
         ввести.
+        И опционально сообщение на случай некорректного ввода
         Обрабатывает некорректный ввод текста/символов, отрицательных чисел
         :return:
         Возвращает целое положительное число
@@ -115,9 +116,9 @@ class TypicalMethods:
                     flag_input_ok = True
                     return int(number_inputs)
                 else:
-                    print(NOT_INT)
+                    print(message)
             except ValueError or TypeError:
-                print(NOT_INT)
+                print(message)
             finally:
                 pass
         print(bcolors.ENDC)  # Возвратили цвет текста к исходному
@@ -173,6 +174,24 @@ class TypicalMethods:
                     print(f'Введённые параметры min и '
                           f'max для {self_name} должны отличаться больше')
         return self
+    
+    def recurse_input_any_int(self, message=NOT_INT) -> int:
+        print(bcolors.OKBLUE)  # Задали цвет текста в консоли
+        try:
+            TypicalMethods.output_dynamic_string(self)
+            if (number_inputs := input()).isnumeric():
+                print(bcolors.ENDC)
+                return int(number_inputs)
+            else:
+                print(message)
+                recurse_input_any_int(self, NOT_INT)
+        except ValueError or TypeError:
+            print(message)
+            recurse_input_any_int(self, NOT_INT)
+        finally:
+            pass
+        print(bcolors.ENDC)  # Возвратили цвет текста к исходному
+    
 class NewException(Exception):
     pass
     # if Exception == 0:
