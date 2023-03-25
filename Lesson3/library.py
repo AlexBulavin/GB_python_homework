@@ -42,7 +42,7 @@ class TypicalMethods:
             if self[i] is not None:
                 sys.stdout.write(self[i])
                 sys.stdout.flush()
-                time.sleep(1 / (1.5*len(self)))
+                time.sleep(1 / (1.5 * len(self)))
             if not sys.platform.startswith('darwin'):  # Для Windows
                 frequency = random.randint(37, 32767)
                 duration = 100  # миллисекунды
@@ -65,12 +65,12 @@ class TypicalMethods:
         }
         ResetColor();
         }'''
+
     def output_dynamic_string_v2(self):
         for i in range(len(self)):
             print(f'{self[i]}', end="")
             time.sleep(1 / len(self))
             sys.stdout.flush()
-
 
     def input_single_int(self):
         """
@@ -81,7 +81,6 @@ class TypicalMethods:
         :return:
         Возвращает целое положительное число
         """
-
         flag_input_ok = False
         while not flag_input_ok:
             print(bcolors.OKBLUE)  # Задали цвет текста в консоли
@@ -98,7 +97,7 @@ class TypicalMethods:
             finally:
                 pass
 
-    def input_any_int(self):
+    def input_any_int(self) -> int:
         """
         Метод ввода целого числа
         На вход получает текст для объяснения пользователю какое число нужно
@@ -107,7 +106,6 @@ class TypicalMethods:
         :return:
         Возвращает целое положительное число
         """
-
         flag_input_ok = False
         while not flag_input_ok:
             print(bcolors.OKBLUE)  # Задали цвет текста в консоли
@@ -124,6 +122,57 @@ class TypicalMethods:
                 pass
         print(bcolors.ENDC)  # Возвратили цвет текста к исходному
 
+    def set_fill_int(self, n_elements, self_name):
+        """
+        Заполняет структуру на входе в параметре self интами
+        :param n_elements: количество элементов структуры self,
+        например, множества
+        :return: возвращает структуру, заполненную интами из инпута
+        """
+        for i in range(n_elements):
+            self.add(TypicalMethods.input_any_int(f'Введите {i + 1} '
+                                      f'элемент из {n_elements} для'
+                                      f' {self_name} множества: '))
+        return self
+
+    def list_fill_random_int(self, n_elements, min_int, max_int, min_included,
+                            max_included, self_name, debug_mode):
+        # self, n_elements, min_int, max_int,
+        # min_included, min_included, self_name, debug_mode
+        """
+        Заполняет структуру на входе в параметре self случайными интами в
+        диапазоне min_int - max_int
+        включая/исключая их (min_included/max_included = True/False)
+        :param n_elements: количество элементов структуры self,
+        например, множества, список
+        :return: возвращает структуру, заполненную случайными интами
+        """
+    # Ниже приведен генератор списка. Проблема в том, что он выдаёт пустой
+    # список, если условие не выполняется
+    # self = [random.randint(min_int, max_int) for i in range(n_elements) if
+    #         min_included and max_included]
+    # self = [random.randint(min_int, max_int - 1) for i in range(n_elements)
+    #         if min_int and not max_included and max_included -
+    #         min_included > 1]
+    # self = [random.randint(min_int + 1, max_int - 1) for i in
+    #         range(n_elements) if not min_int and not max_included and
+    #         max_included - min_included > 2]
+        # 
+        for i in range(n_elements):
+            if min_included and max_included:
+                self.append(random.randint(min_int, max_int))
+
+            elif min_int and not max_included and max_included - \
+                    min_included > 1:
+                self.append(random.randint(min_int, max_int - 1))
+            elif not min_int and not max_included and max_included - \
+                    min_included > 2:
+                self.append(random.randint(min_int + 1, max_int - 1))
+            else:
+                if debug_mode:
+                    print(f'Введённые параметры min и '
+                          f'max для {self_name} должны отличаться больше')
+        return self
 class NewException(Exception):
     pass
     # if Exception == 0:
