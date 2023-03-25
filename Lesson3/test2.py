@@ -9,7 +9,7 @@ import os
 # Очищаем консоль
 os.system('clear')
 
-debug_mode = True
+debug_mode = False
 
 print(f"Test", debug_mode)
 
@@ -25,8 +25,7 @@ def not_null_input():
     return number2
 
 
-def input_operation(self=""):
-    user_input = self
+def input_operation():
     tm.output_dynamic_string(f"Введите операцию (+, -, *, / или "
                              f"0 для выхода):")
     user_input = input()
@@ -37,7 +36,7 @@ def input_operation(self=""):
         print()
         if debug_mode:
             print(f"user_input = {user_input}")
-        user_input = input_operation(user_input)
+        user_input = input_operation()
 
     if debug_mode:
         print(f"43 user_input = {user_input}")
