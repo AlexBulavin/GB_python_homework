@@ -7,12 +7,10 @@ __author__ = 'Alex Bulavin'
 элементов второго множества. Затем пользователь вводит сами элементы множеств.
 '''
 
-from .lesson3.library import TypicalMethods as tm
-# from ..lesson3 import strings_const
-from ..Lesson3.library import TypicalMethods as tm
+from ..lesson3.library import TypicalMethods as tm
 from library import bcolors
 from library import NewException
-
+from ..lesson3.strings_const import *
 import os
 
 # Очищаем консоль
