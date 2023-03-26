@@ -35,7 +35,10 @@ input_number = tm.recurse_input_big_int(f"Введите целое натура
                                         NOT_INT_POSITIVE, True, debug_mode)
 print(f"Введено число {input_number}" if (debug_mode) else "")
 number_reverser(input_number, input_number)"""
-# Очищаем консоль
+
+"""
+task_4
+
 # Очищаем консоль
 os.system('clear')
 
@@ -60,4 +63,31 @@ def sum_calc(self, counter, sum_num):
 input_number = tm.recurse_input_natural(f"Введите количество элементов: ",
                                         NOT_INT_POSITIVE_OR_TEXT, debug_mode)
 print(f"Количество элементов ряда a[n] = -a[n-1]/2 равно {input_number}"
-      f", их сумма: {sum_calc(start_number, input_number, start_number)}")
+      f", их сумма: {sum_calc(start_number, input_number, start_number)}")"""
+
+# task_5
+debug_mode = False  # True  #  На время отладки выставляем флаг в True
+start_number = 32  # Стартовый код ASCII
+end_number = 127  # Конечный код ASCII
+
+
+def output_ascii(start_num, current_number, end_number):
+    if current_number <= end_number:
+        # tm.output_dynamic_string(f"{current_number} - "
+        #                          f"{chr(current_number)}\t")
+        #print(f"{current_number} - {chr(current_number)}\t", end="")
+        print('{0:^{1}}'.format(f"{current_number}-{chr(current_number)}",
+                                8), end='')
+        if (current_number - start_num + 1) % 10 == 0:
+            print("\n")
+        current_number += 1
+        output_ascii(start_num, current_number, end_number)
+    else:
+        print("\n")
+        return
+
+
+#  Main algorithm
+print(bcolors.OKBLUE) 
+output_ascii(start_number, start_number, end_number)
+print(bcolors.DEFAULT)
