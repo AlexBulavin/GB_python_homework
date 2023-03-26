@@ -1,7 +1,20 @@
 __author__ = 'Alex Bulavin'
+"""
+Задание 6. В программе генерируется случайное целое число от 0 до 100.
+Пользователь должен его отгадать не более чем за 10 попыток. После каждой
+неудачной попытки должно сообщаться больше или меньше введенное пользователем
+число, чем то, что загадано. Если за 10 попыток число не отгадано,
+то вывести загаданное число.
+Решите через рекурсию. В задании нельзя применять циклы.
+"""
+import os
+import random
+from ..lesson3.library import TypicalMethods as tm
+from ..lesson3.strings_const import *
+from ..lesson3.library import bcolors
+
 # Очищаем консоль
 os.system('clear')
-import random
 
 debug_mode = False  # True
 
