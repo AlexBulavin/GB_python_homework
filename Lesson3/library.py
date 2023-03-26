@@ -228,6 +228,35 @@ class TypicalMethods:
         finally:
             print(bcolors.ENDC)  # Возвратили цвет текста к исходному
 
+    def recurse_input_natural(self, message=NOT_INT, debug_mode=False) -> int:
+        """
+        Метод ввода целого числа рекурсионной проверкой
+        На вход получает текст для объяснения пользователю какое число нужно
+        ввести.
+        И опционально сообщение на случай некорректного ввода
+        Обрабатывает некорректный ввод текста/символов, отрицательных чисел
+        :return:
+        Возвращает целое положительное число
+        """
+        print(bcolors.OKBLUE)  # Задали цвет текста в консоли
+        try:
+            TypicalMethods.output_dynamic_string(self)
+            if (number_inputs := input()).isnumeric() \
+                    and int(number_inputs) > 0:
+                print(f"number_inputs from recurse_input_big_int = "
+                      f"{number_inputs}" if (debug_mode) else "", end="")
+                print(bcolors.ENDC)
+                return int(number_inputs)
+            else:
+                print(message)
+                return TypicalMethods.recurse_input_natural(self, message, 
+                                                            debug_mode)
+        except ValueError or TypeError:
+            print(message)
+            return TypicalMethods.recurse_input_natural(self, message,
+                                                        debug_mode)
+        finally:
+            print(bcolors.ENDC)  # Возвратили цвет текста к исходному
 
 '''
 while True:
