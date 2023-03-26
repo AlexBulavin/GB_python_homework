@@ -137,5 +137,6 @@ def numbers_count(self, input_number):
 #  Main algorithm
 input_number = tm.recurse_input_big_int(f"Введите целое натуральное число: ",
                                         NOT_INT_POSITIVE, True)
-print(f"Введено число {input_number}")  # if (debug_mode) else "")
+print(f"Введено число {input_number}" if (debug_mode) else "", end="")
 numbers_count(input_number, input_number)
+

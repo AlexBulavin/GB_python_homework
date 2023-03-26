@@ -200,7 +200,8 @@ class TypicalMethods:
         finally:
             print(bcolors.ENDC)  # Возвратили цвет текста к исходному
 
-    def recurse_input_big_int(self, message=NOT_INT, is_positive=False) -> int:
+    def recurse_input_big_int(self, message=NOT_INT, is_positive=False, 
+                              debug_mode=False) -> int:
         """
         Метод ввода целого числа рекурсионной проверкой
         На вход получает текст для объяснения пользователю какое число нужно
@@ -215,8 +216,8 @@ class TypicalMethods:
             TypicalMethods.output_dynamic_string(self)
             if (number_inputs := input()).isnumeric() and is_positive:
                 print(f"number_inputs from recurse_input_big_int = "
-                      f"{number_inputs}")
-                # print(bcolors.ENDC)
+                      f"{number_inputs}" if (debug_mode) else "", end="")
+                print(bcolors.ENDC)
                 return int(number_inputs)
             else:
                 print(message)
