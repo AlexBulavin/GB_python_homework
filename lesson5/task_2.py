@@ -24,27 +24,41 @@ from ..lesson3.library import bcolors
 # Очищаем консоль
 os.system('clear')
 
-debug_mode = False
+debug_mode = False  # На время отладки выставляем флаг в True
 odd_count = 0
 even_count = 0
 
 
 def numbers_count(self, input_number):
-    self.input_number = input_number
+    global odd_count, even_count, debug_mode
+    print(f"def numbers_count self = {self}, input_number = {input_number}"
+          if (debug_mode) else "")
     curr_didgit = self % 10
+    self //= 10
+
+    print(f"def numbers_count curr_didgit = {curr_didgit} self = {self}"
+          if (debug_mode) else "")
     if curr_didgit % 2 == 0:
         even_count += 1
+        print(f"def numbers_count even_count = {even_count}"
+              if (debug_mode) else "")
     else:
         odd_count += 1
-    if self > 9:
-        numbers_count(self)
+        print(f"def numbers_count odd_count = {odd_count}"
+              if (debug_mode) else "")
+    if self > 0:
+        numbers_count(self, input_number)
     else:
         tm.output_dynamic_string(f"В числе {input_number} содержится "
                                  f"{even_count} чётных цифр и {odd_count}"
-                                 f"нечетных")
+                                 f" нечетных\n")
+        return
+
+    #  Main algorithm
 
 
-#  Main algorithm
-input_number = tm.recurse_input_any_int(f"Введите целое натуральное число",
+input_number = tm.recurse_input_big_int(f"Введите целое натуральное число: ",
                                         NOT_INT_POSITIVE, True)
-numbers_count(input_number)
+print(f"Введено число {input_number}")  # if (debug_mode) else "")
+numbers_count(input_number, input_number)
+

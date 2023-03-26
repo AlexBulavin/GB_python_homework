@@ -188,7 +188,7 @@ class TypicalMethods:
         print(bcolors.OKBLUE)  # Задали цвет текста в консоли
         try:
             TypicalMethods.output_dynamic_string(self)
-            if (number_inputs := input()).isnumeric() and not is_positive:
+            if (number_inputs := input()).isnumeric() and is_positive:
                 print(bcolors.ENDC)
                 return int(number_inputs)
             else:
@@ -198,8 +198,34 @@ class TypicalMethods:
             print(message)
             return TypicalMethods.recurse_input_any_int(self, message)
         finally:
-            pass
-        print(bcolors.ENDC)  # Возвратили цвет текста к исходному
+            print(bcolors.ENDC)  # Возвратили цвет текста к исходному
+
+    def recurse_input_big_int(self, message=NOT_INT, is_positive=False) -> int:
+        """
+        Метод ввода целого числа рекурсионной проверкой
+        На вход получает текст для объяснения пользователю какое число нужно
+        ввести.
+        И опционально сообщение на случай некорректного ввода
+        Обрабатывает некорректный ввод текста/символов, отрицательных чисел
+        :return:
+        Возвращает целое положительное число
+        """
+        print(bcolors.OKBLUE)  # Задали цвет текста в консоли
+        try:
+            TypicalMethods.output_dynamic_string(self)
+            if (number_inputs := input()).isnumeric() and is_positive:
+                print(f"number_inputs from recurse_input_big_int = "
+                      f"{number_inputs}")
+                # print(bcolors.ENDC)
+                return int(number_inputs)
+            else:
+                print(message)
+                return TypicalMethods.recurse_input_any_int(self, message)
+        except ValueError or TypeError:
+            print(message)
+            return TypicalMethods.recurse_input_any_int(self, message)
+        finally:
+            print(bcolors.ENDC)  # Возвратили цвет текста к исходному
 
 
 '''
