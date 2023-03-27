@@ -132,12 +132,12 @@ class TypicalMethods:
         """
         for i in range(n_elements):
             self.add(TypicalMethods.input_any_int(f'Введите {i + 1} '
-                                      f'элемент из {n_elements} для'
-                                      f' {self_name} множества: '))
+                                                  f'элемент из {n_elements} для'
+                                                  f' {self_name} множества: '))
         return self
 
     def list_fill_random_int(self, n_elements, min_int, max_int, min_included,
-                            max_included, self_name, debug_mode):
+                             max_included, self_name, debug_mode):
         # self, n_elements, min_int, max_int,
         # min_included, min_included, self_name, debug_mode
         """
@@ -148,16 +148,16 @@ class TypicalMethods:
         например, множества, список
         :return: возвращает структуру, заполненную случайными интами
         """
-    # Ниже приведен генератор списка. Проблема в том, что он выдаёт пустой
-    # список, если условие не выполняется
-    # self = [random.randint(min_int, max_int) for i in range(n_elements) if
-    #         min_included and max_included]
-    # self = [random.randint(min_int, max_int - 1) for i in range(n_elements)
-    #         if min_int and not max_included and max_included -
-    #         min_included > 1]
-    # self = [random.randint(min_int + 1, max_int - 1) for i in
-    #         range(n_elements) if not min_int and not max_included and
-    #         max_included - min_included > 2]
+        # Ниже приведен генератор списка. Проблема в том, что он выдаёт пустой
+        # список, если условие не выполняется
+        # self = [random.randint(min_int, max_int) for i in range(n_elements) if
+        #         min_included and max_included]
+        # self = [random.randint(min_int, max_int - 1) for i in range(n_elements)
+        #         if min_int and not max_included and max_included -
+        #         min_included > 1]
+        # self = [random.randint(min_int + 1, max_int - 1) for i in
+        #         range(n_elements) if not min_int and not max_included and
+        #         max_included - min_included > 2]
         # 
         for i in range(n_elements):
             if min_included and max_included:
@@ -174,8 +174,8 @@ class TypicalMethods:
                     print(f'Введённые параметры min и '
                           f'max для {self_name} должны отличаться больше')
         return self
-    
-    def recurse_input_any_int(self, message=NOT_INT) -> int:
+
+    def recurse_input_any_int(self, message=NOT_INT, is_positive=False) -> int:
         """
         Метод ввода целого числа рекурсионной проверкой
         На вход получает текст для объяснения пользователю какое число нужно
@@ -188,7 +188,7 @@ class TypicalMethods:
         print(bcolors.OKBLUE)  # Задали цвет текста в консоли
         try:
             TypicalMethods.output_dynamic_string(self)
-            if (number_inputs := input()).isnumeric():
+            if (number_inputs := input()).isnumeric() and is_positive:
                 print(bcolors.ENDC)
                 return int(number_inputs)
             else:
@@ -198,9 +198,82 @@ class TypicalMethods:
             print(message)
             return TypicalMethods.recurse_input_any_int(self, message)
         finally:
-            pass
-        print(bcolors.ENDC)  # Возвратили цвет текста к исходному
-    
+            print(bcolors.ENDC)  # Возвратили цвет текста к исходному
+
+    def recurse_input_big_int(self, message=NOT_INT, is_positive=False, 
+                              debug_mode=False) -> int:
+        """
+        Метод ввода целого числа рекурсионной проверкой
+        На вход получает текст для объяснения пользователю какое число нужно
+        ввести.
+        И опционально сообщение на случай некорректного ввода
+        Обрабатывает некорректный ввод текста/символов, отрицательных чисел
+        :return:
+        Возвращает целое положительное число
+        """
+        print(bcolors.OKBLUE)  # Задали цвет текста в консоли
+        try:
+            TypicalMethods.output_dynamic_string(self)
+            if (number_inputs := input()).isnumeric() and is_positive:
+                print(f"number_inputs from recurse_input_big_int = "
+                      f"{number_inputs}" if (debug_mode) else "", end="")
+                print(bcolors.ENDC)
+                return int(number_inputs)
+            else:
+                print(message)
+                return TypicalMethods.recurse_input_any_int(self, message)
+        except ValueError or TypeError:
+            print(message)
+            return TypicalMethods.recurse_input_any_int(self, message)
+        finally:
+            print(bcolors.ENDC)  # Возвратили цвет текста к исходному
+
+    def recurse_input_natural(self, message=NOT_INT, debug_mode=False) -> int:
+        """
+        Метод ввода целого числа рекурсионной проверкой
+        На вход получает текст для объяснения пользователю какое число нужно
+        ввести.
+        И опционально сообщение на случай некорректного ввода
+        Обрабатывает некорректный ввод текста/символов, отрицательных чисел
+        :return:
+        Возвращает целое положительное число
+        """
+        print(bcolors.OKBLUE)  # Задали цвет текста в консоли
+        try:
+            TypicalMethods.output_dynamic_string(self)
+            if (number_inputs := input()).isnumeric() \
+                    and int(number_inputs) > 0:
+                print(f"number_inputs from recurse_input_big_int = "
+                      f"{number_inputs}" if (debug_mode) else "", end="")
+                print(bcolors.ENDC)
+                return int(number_inputs)
+            else:
+                print(message)
+                return TypicalMethods.recurse_input_natural(self, message, 
+                                                            debug_mode)
+        except ValueError or TypeError:
+            print(message)
+            return TypicalMethods.recurse_input_natural(self, message,
+                                                        debug_mode)
+        finally:
+            print(bcolors.ENDC)  # Возвратили цвет текста к исходному
+
+'''
+while True:
+    try:
+        a = int(input("Введите число A: "))
+        b = int(input("Введите число B: "))
+    except ValueError:
+        print("Введите целое натуральное число!")
+    else:
+        if b < 0:
+            print("B не может быть меньше 0")
+        else:
+            break
+print(my_pow(a, b))
+'''
+
+
 class NewException(Exception):
     pass
     # if Exception == 0:
