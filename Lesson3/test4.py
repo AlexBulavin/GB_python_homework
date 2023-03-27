@@ -32,15 +32,16 @@ else:
     """
 
 
-def power(a, b):
+def sum_a_b(a, b):
     if b == 0:
-        return 1
+        return a
     else:
-        return a * power(a, b - 1)
+        return sum_a_b(a + 1, b - 1)
 
 
-input_a = tm.recurse_input_natural(f"Введите значение основания степени: ",
+input_a = tm.recurse_input_natural(f"Введите первое слагаемое: ",
                                    NOT_INT_POSITIVE_OR_TEXT, debug_mode)
-input_b = tm.recurse_input_natural("Введите значение показателя степени: ",
+input_b = tm.recurse_input_natural("Введите второе слагаемое: ",
                                    NOT_INT_POSITIVE_OR_TEXT, debug_mode)
-tm.output_dynamic_string(f'{input_a}^{input_b} = {power(input_a, input_b)}\n')
+tm.output_dynamic_string(f'{input_a}+{input_b} = '
+                         f'{sum_a_b(input_a, input_b)}\n')
