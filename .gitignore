@@ -154,7 +154,15 @@ cython_debug/
 
 .folder
 .idea
+
+json_to_csv.py
+.json_to_csv.py
+
+recipes.json
+.recipes.json
+
 __pycache__
+.folder
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
@@ -163,4 +171,4 @@ __pycache__
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-.folder
+
