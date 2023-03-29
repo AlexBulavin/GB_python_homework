@@ -38,7 +38,8 @@ def sum_a_b(a, b):
     else:
         return sum_a_b(a + 1, b - 1)
 
-
+print('\033[92m', 'Ptktysq ntrcn')
+print(bcolors.DEFAULT)
 input_a = tm.recurse_input_natural(f"Введите первое слагаемое: ",
                                    NOT_INT_POSITIVE_OR_TEXT, debug_mode)
 input_b = tm.recurse_input_natural("Введите второе слагаемое: ",
