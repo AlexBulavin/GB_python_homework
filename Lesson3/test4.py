@@ -31,7 +31,7 @@ else:
           f"{left_sum - right_sum} ")
     """
 
-
+"""
 def sum_a_b(a, b):
     if b == 0:
         return a
@@ -44,4 +44,38 @@ input_a = tm.recurse_input_natural(f"Введите первое слагаем�
 input_b = tm.recurse_input_natural("Введите второе слагаемое: ",
                                    NOT_INT_POSITIVE_OR_TEXT, debug_mode)
 tm.output_dynamic_string(f'{input_a}+{input_b} = '
-                         f'{sum_a_b(input_a, input_b)}\n')
+                         f'{sum_a_b(input_a, input_b)}\n')"""
+
+"""def an_element(a1, n, d, counter):
+    print(f"a{counter} = {a1 + (counter - 1) * d:.2f}")
+    counter += 1
+    if counter <= n:
+        return an_element(a1, n, d, counter)
+    return
+
+
+input_a1 = tm.input_any_float(f"Введите чтсло - первый элемент прогрессии: ",
+                              NOT_INT_POSITIVE_OR_TEXT, debug_mode)
+
+input_d = tm.input_any_float("Введите число - разность прогрессии: ",
+                           NOT_INT_POSITIVE_OR_TEXT, debug_mode)
+
+input_n = tm.input_any_int("Введите натуральное число - "
+                           "количество элементов прогрессии: ",
+                           NOT_INT_POSITIVE_OR_TEXT, debug_mode)
+
+an_element(input_a1, input_n, input_d, 1)
+"""
+input_data_min = tm.input_any_int(f"Введите минимальное значение элемента "
+                                  f"списка: ",
+                                  NOT_INT_POSITIVE_OR_TEXT, debug_mode)
+input_data_max = tm.input_any_int(f"Введите максимальное значение "
+                                  f"элемента списка: ",
+                                  NOT_INT_POSITIVE_OR_TEXT, debug_mode)
+data_list = []
+tm.list_fill_random_int(data_list, 10, 0, 100, True, True, "data_list", False)
+data_list.sort()
+print(f"Отсортированный список: ", * data_list)
+print(f"Индексы элементов, которые >= {input_data_min} и <= {input_data_max}")
+print(*list(i for i in range(len(data_list))
+            if input_data_max >= data_list[i] >= input_data_min))

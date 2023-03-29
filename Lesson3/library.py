@@ -97,7 +97,7 @@ class TypicalMethods:
             finally:
                 pass
 
-    def input_any_int(self, message=NOT_INT) -> int:
+    def input_any_int(self, message=NOT_INT, debug_mode=False) -> int:
         """
         Метод ввода целого числа
         На вход получает текст для объяснения пользователю какое число нужно
@@ -112,13 +112,42 @@ class TypicalMethods:
             print(bcolors.OKBLUE)  # Задали цвет текста в консоли
             try:
                 TypicalMethods.output_dynamic_string(self)
-                if (number_inputs := input()).isnumeric():
+                if (number_inputs := input().replace('-', '', 1)
+                        .replace('.', '', 1)).isdigit():
                     flag_input_ok = True
                     return int(number_inputs)
                 else:
-                    print(message)
+                    print(f"else {message}")
             except ValueError or TypeError:
-                print(message)
+                print(f"except {message}")
+            finally:
+                pass
+        print(bcolors.ENDC)  # Возвратили цвет текста к исходному
+
+    def input_any_float(self, message=NOT_INT, debug_mode=False) -> int:
+        """
+        Метод ввода целого числа
+        На вход получает текст для объяснения пользователю какое число нужно
+        ввести.
+        И опционально сообщение на случай некорректного ввода
+        Обрабатывает некорректный ввод текста/символов, отрицательных чисел
+        :return:
+        Возвращает целое положительное число
+        """
+        flag_input_ok = False
+        while not flag_input_ok:
+            print(bcolors.OKBLUE)  # Задали цвет текста в консоли
+            try:
+                TypicalMethods.output_dynamic_string(self)
+                number_inputs = input()
+                if (number_inputs.replace('-', '', 1)
+                        .replace('.', '', 1).replace(',', '', 1)).isdigit():
+                    flag_input_ok = True
+                    return float(number_inputs.replace(",", "."))
+                else:
+                    print(f"else {message}")
+            except ValueError or TypeError:
+                print(f"except {message}")
             finally:
                 pass
         print(bcolors.ENDC)  # Возвратили цвет текста к исходному
