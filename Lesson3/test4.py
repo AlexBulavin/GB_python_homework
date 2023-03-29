@@ -80,3 +80,5 @@ print(f"Отсортированный список: ", * data_list)
 print(f"Индексы элементов, которые >= {input_data_min} и <= {input_data_max}")
 print(*list(i for i in range(len(data_list))
             if input_data_max >= data_list[i] >= input_data_min))
+
+#Написать парсер
