@@ -1,8 +1,8 @@
 __author__ = 'Alex Bulavin'
 import json
 import datetime
-import requests
 import csv
+import requests
 
 # Получаем от пользователя ID устройств
 device_ids = input("Введите ID устройств через запятую: ")
