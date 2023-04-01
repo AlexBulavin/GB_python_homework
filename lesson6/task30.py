@@ -34,6 +34,4 @@ input_d = tm.input_any_int("Введите разность прогрессии
 input_n = tm.input_any_int("Введите количество элементов прогрессии: ",
                                    NOT_INT_POSITIVE_OR_TEXT, debug_mode)
 
-tm.output_dynamic_string(f'{input_a}+{input_b} = '
-                         f'{sum_a_b(input_a, input_b)}\n')
 an_element(input_a1, input_n, input_d, 1)
