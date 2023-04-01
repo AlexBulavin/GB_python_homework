@@ -1,5 +1,10 @@
 __author__ = 'Alex Bulavin'
 
+url = 'https://content.dev.skydom.company/v1/graphql'
+headers = {'Content-type': 'application/json'}
+
+path_to_cert = '/Users/alex/Documents/Python_projects/tubeles/venv/lib/python3.9/site-packages/future/backports/test/ssl_cert.pem'
+
 graphql_query = """
 query getRecipes($deviceIds: [Int!], $categoryId: Int, $descriptionIds: [Int!], $locale: String!, $recipeId: Int, $query: String, $offset: Int, $limit: Int) {
   recipe_description(
@@ -88,7 +93,37 @@ variables = {
     "limit": None
 }
 
-url = 'https://content.dev.skydom.company/v1/graphql'
-headers = {'Content-type': 'application/json'}
-
-path_to_cert = '/Users/alex/Documents/Python_projects/tubeles/venv/lib/python3.9/site-packages/future/backports/test/ssl_cert.pem'
+device_query = """
+query MyQuery {
+  SearchModels($search: String!, $limit: Int, $locale: String!, $offset: Int, $path: [String!], $state: available) {
+    broadcast_name
+    catalog
+    catalog_image_id
+    category_id
+    commit_id
+    id
+    image_id
+    kind
+    name
+    pairing_image_id
+    pairing_text
+    parent_id
+    protocols
+    slug
+    state
+    transport
+    vendor {
+      id
+      name
+    }
+  }
+}"""
+search = input("Введите поисковой запрос, например: RMC-M800S ")
+device_var = {
+    "search": search,
+    "limit": 10,
+    "locale": "ru",
+    "offset": 0,  # Сдвиг в запросе данных относительно нулевого значения. Используется при пагинации
+    "path": ["Devices"],
+    "state": "available"
+}
