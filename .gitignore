@@ -164,6 +164,12 @@ recipes.json
 __pycache__
 .folder
 
+/recipes
+query.py
+json_to_csv.py
+json_to_csv_from_file.py
+
+
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
