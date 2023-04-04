@@ -23,7 +23,6 @@ __author__ = 'Alex Bulavin'
 выполнять поэлементно — первый элемент первой строки первой матрицы 
 складываем с первым элементом первой строки второй матрицы и т.д. """
 
-import inspect
 import os
 import inspect
 
@@ -37,10 +36,8 @@ class Matrix:
         self.list_of_lists = list_of_lists
 
     def __str__(self, message):
-        # print(type(self), type(list))
-        # if type(self) == type(list):
         print(f'{message}')
-        for row in self.list_of_lists:
+        for row in message:
             for column in row:
                 print(column, end='\t')
             print(f'\n')
