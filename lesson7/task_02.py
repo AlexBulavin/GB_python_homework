@@ -20,10 +20,10 @@ length (длина в метрах), width (ширина в метрах).
 
 
 class Road:
-    def __init__(self, len_and_width, density, thickness):
+    def __init__(self, len_and_width):
         self._len_and_width = len_and_width
-        self.density = density
-        self.thickness = thickness
+        self.density = 25
+        self.thickness = 0.05
 
     def atphalt_mass(self):
         massa = self._len_and_width[0] \
@@ -36,5 +36,5 @@ class Road:
               f"{int(massa)} кг = {massa / 1000}т асфальтобетонной смеси")
 
 
-road1 = Road([5000, 20], 25, 0.05)
+road1 = Road([5000, 20])
 road1.atphalt_mass()
