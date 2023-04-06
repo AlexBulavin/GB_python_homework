@@ -16,10 +16,8 @@ __author__ = 'Alex Bulavin'
 
 '''
 import os
-import inspect
 import time
 import sys
-from task_04 import Matrix as m
 
 os.environ['TERM'] = 'xterm'
 # Очищаем консоль
@@ -39,26 +37,24 @@ print('\033[94m')
 output_dynamic_string(f'Ввод:')
 silabas = input().lower().split(' ')
 
-# output_dynamic_string(f'{silabas}\n')
-
 glas = 'аеёиоуыэюя'
-including_flag = False
+
 including_list = []
 glas_counter = 0
-item_counter = 0
+
 for frase in silabas:
     for letter in frase:
         for item in glas:
             glas_counter += letter.count(item)
     including_list.append(glas_counter)
-    # TODO Сделать сравнение следующего элемента с предыдущим
-    including_flag = True if item_counter > 0 \
-                             and including_list[item_counter] == \
-                             including_list[item_counter - 1] \
-        else including_flag
+
     glas_counter = 0
-    item_counter += 1
-# output_dynamic_string(f'{including_list} \n')
-# print(including_flag)
-message = ('Пам парам\n', 'Парам пам-пам\n')[including_flag]
+
+rithm = len(set(including_list))
+if debug_mode:
+    print(including_list)
+    print(rithm)
+
+message = ('Пам парам\n', 'Парам пам-пам\n')[rithm == 1
+                                             and len(including_list) > 1]
 output_dynamic_string(message)
