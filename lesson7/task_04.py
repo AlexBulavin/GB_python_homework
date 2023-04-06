@@ -41,11 +41,12 @@ class Matrix:
         return "\n".join([" ".join(map(str, row))
                           for row in self.list_of_lists])
 
-    def add(self, other):
+    def __add__(self, other):
         new_list = []
-        if len(self.list_of_lists) != len(other) or \
-                len(self.list_of_lists[0]) != len(other[0]):
+        if len(self.list_of_lists) != len(other.list_of_lists) or \
+                len(self.list_of_lists[0]) != len(other.list_of_lists[0]):
             raise ValueError("Матрицы должны иметь одинаковую размерность")
+
         for row in range(len(self.list_of_lists)):
             new_raw = []
             for column in range(len(self.list_of_lists[0])):
@@ -55,10 +56,12 @@ class Matrix:
                     print(f'line {inspect.currentframe().f_lineno} '
                           f'{self.list_of_lists}')
                     print(f'line {inspect.currentframe().f_lineno}\n{other}')
-                new_item = self.list_of_lists[row][column] + other[row][column]
+                new_item = self.list_of_lists[row][column] + \
+                           other.list_of_lists[row][column]
                 new_raw.append(new_item)
             new_list.append(new_raw)
-        return Matrix(new_list)
+        new_maatrix = Matrix(new_list)
+        return new_maatrix
 
 
 list_of_lists1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
@@ -70,5 +73,5 @@ print(m1)
 print('\n')
 print(m2)
 print('\n')
-new_matrix = m1.add(m2.list_of_lists)
+new_matrix = m1 + m2
 print(new_matrix)
