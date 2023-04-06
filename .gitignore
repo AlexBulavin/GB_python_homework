@@ -168,7 +168,8 @@ __pycache__
 query.py
 json_to_csv.py
 json_to_csv_from_file.py
-
+recipes
+.recipes
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
