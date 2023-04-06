@@ -18,11 +18,8 @@ __author__ = 'Alex Bulavin'
 '''
 
 import os
-import sys
 from time import sleep
-
-sys.path.append('/Users/alex/Documents/GeekBrains/GB_python_homework/lesson3/')
-from library import bcolors
+from ..lesson3.library import bcolors
 
 os.environ['TERM'] = 'xterm'
 # Очищаем консоль

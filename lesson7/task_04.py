@@ -31,32 +31,32 @@ os.environ['TERM'] = 'xterm'
 os.system('clear')
 
 debug_mode = False
+
+
 class Matrix:
     def __init__(self, list_of_lists):
         self.list_of_lists = list_of_lists
 
-    def __str__(self, message):
-        print(f'{message}')
-        for row in message:
-            for column in row:
-                print(column, end='\t')
-            print(f'\n')
+    def __str__(self):
+        return "\n".join([" ".join(map(str, row))
+                          for row in self.list_of_lists])
 
     def add(self, other):
         new_list = []
-
+        if len(self.list_of_lists) != len(other) or \
+                len(self.list_of_lists[0]) != len(other[0]):
+            raise ValueError("Матрицы должны иметь одинаковую размерность")
         for row in range(len(self.list_of_lists)):
             new_raw = []
             for column in range(len(self.list_of_lists[0])):
                 if debug_mode:
-                    print(f'line {inspect.currentframe().f_lineno} row = {row}, '
-                          f'column = {column} \n')
-                    print(self.list_of_lists)
-                    print(other)
-                    print(self.list_of_lists[row][column] + \
-                          other[row][column])
-                new_raw.append(self.list_of_lists[row][column] + \
-                                       other[row][column])
+                    print(f'line {inspect.currentframe().f_lineno} '
+                          f'row = {row}, column = {column} \n')
+                    print(f'line {inspect.currentframe().f_lineno} '
+                          f'{self.list_of_lists}')
+                    print(f'line {inspect.currentframe().f_lineno}\n{other}')
+                new_item = self.list_of_lists[row][column] + other[row][column]
+                new_raw.append(new_item)
             new_list.append(new_raw)
         return Matrix(new_list)
 
@@ -66,9 +66,9 @@ list_of_lists2 = [[21, 22, 23], [24, 25, 26], [27, 28, 29]]
 
 m1 = Matrix(list_of_lists1)
 m2 = Matrix(list_of_lists2)
-m3 = Matrix(list_of_lists1)
-
-matrix1 = m1.__str__(f'Задана матрица 1:')
-matrix2 = m2.__str__(f'Задана матрица 2:')
-
-new_matrix = m3.add(list_of_lists2).__str__(f'Сумма матриц:')
+print(m1)
+print('\n')
+print(m2)
+print('\n')
+new_matrix = m1.add(m2.list_of_lists)
+print(new_matrix)
