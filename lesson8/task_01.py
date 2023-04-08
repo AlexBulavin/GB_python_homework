@@ -38,12 +38,31 @@ def get_data():
             file_data = f.read()
 
         os_prod = re.search(r'Изготовитель системы:\s*(.*)', file_data)
+        '''Поиск строки в переменной file_data, которая начинается с текста 
+        "Изготовитель системы:", за которым следует произвольное количество 
+        пробелов (\s*), и затем захватывает любые символы до конца строки с 
+        помощью символа (.*). Результат поиска сохраняется в объекте 
+        os_prod, который может использоваться для получения значения, 
+        соответствующего названию изготовителя системы. 
+        Использует модуль re для регулярных выражений, 
+        который позволяет осуществлять поиск по шаблону. '''
         os_name = re.search(r'Название ОС:\s*(.*)', file_data)
         os_code = re.search(r'Код продукта:\s*(.*)', file_data)
         os_type = re.search(r'Тип системы:\s*(.*)', file_data)
 
         if os_prod:
             os_prod_list.append(os_prod.group(1))
+            '''Эта строка кода добавляет найденное значение изготовителя 
+            операционной системы в список os_prod_list. Метод group(1) 
+            объекта os_prod возвращает первую (и единственную) группу 
+            захвата в регулярном выражении, которая содержит захваченные 
+            символы, соответствующие шаблону поиска в скобках (.*). Это 
+            значит, что os_prod.group(1) содержит значение, соответствующее 
+            названию изготовителя операционной системы, найденного с помощью 
+            регулярного выражения в предыдущей строке кода. Затем, найденное 
+            значение добавляется в конец списка os_prod_list с помощью 
+            метода append(), чтобы можно было использовать это значение 
+            позже в программе. '''
         if os_name:
             os_name_list.append(os_name.group(1))
         if os_code:
@@ -54,12 +73,11 @@ def get_data():
         main_data.append([os_prod.group(1), os_name.group(1), os_code.group(1),
                           os_type.group(1)])
 
-    return os_prod_list, os_name_list, os_code_list, os_type_list, main_data
+    return main_data
 
 
 def write_to_csv(csv_file):
-    os_prod_list, os_name_list, os_code_list, os_type_list, \
-        main_data = get_data()
+    main_data = get_data()
 
     with open(csv_file, 'w', newline='') as f:
         writer = csv.writer(f)
