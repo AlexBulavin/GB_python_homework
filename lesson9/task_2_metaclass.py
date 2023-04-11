@@ -10,34 +10,37 @@ __call__() вызывается при создании объектов кла�
 '''
 
 
-class SingletonMeta(type):
-    _instances = {}
+class TypeMeta(type):
+    a = None
 
     # Должен вернуть словарь для атрибутов класса
     @classmethod
     def __prepare__(metacls, name, bases):
-        print(f'Перегружаю prepare')
+        # print(f'Перегружаю prepare')
         return type.__prepare__(metacls, name, bases)
 
     # Должен создать и вернуть новый класс
     def __new__(cls, name, bases, dct):
-        print(f'Выделение памяти для класса {name}, '
-              f'имеющего кортеж базовых классов {bases}, '
-              f'и словарь атрибутов {dct}')
+        # print(f'Выделение памяти для класса {name}, '
+        #       f'имеющего кортеж базовых классов {bases}, '
+        #       f'и словарь атрибутов {dct}')
         return type.__new__(cls, name, bases, dct)
 
     # Должен инициализировать созданный класс
 
     def __init__(cls, name, bases, dct):
-        print(f'Инициализация класса {name}')
-        super(SingletonMeta, cls).__init__(name, bases, dct)
+        # print(f'Инициализация класса {name}')
+        super(TypeMeta, cls).__init__(name, bases, dct)
 
     # Должен создать и вернуть экземпляр нового класса
     def __call__(cls, *args, **kwargs):
-        print(f'Перегрузка класса {args}, {kwargs}')
-        if cls not in cls._instances:
-            cls._instances[cls] = super().__call__(*args, **kwargs)
-        return cls._instances[cls]
+        # print(f'Перегрузка класса {args}, {kwargs}')
+        if cls.a is None:
+            cls.a = super().__call__(*args, **kwargs)
+        return cls.a
+
+    def __set_name__(self, owner, incoming_attr):
+        self.incoming_attr = incoming_attr
 
 
 class DocMetaTest(type):
@@ -49,7 +52,7 @@ class DocMetaTest(type):
         # Здесь clsname - имя класса
         # bases - родительский класс
         # clsdict - интерфейс класса, то есть методы и атрибуты класса
-        print(clsdict.items())
+        # print(clsdict.items())
         for key, value in clsdict.items():  # В item будут находиться все
             # атрибуты и методы подчиненного класса
             if key.startswith('__'):  # Пропустить специальные и
@@ -67,7 +70,7 @@ class DocMetaTest(type):
         type.__init__(self, clsname, bases, clsdict)
 
 
-class Combine(SingletonMeta, DocMetaTest):
+class Combine(TypeMeta, DocMetaTest):
     pass
 
 
@@ -75,11 +78,13 @@ class MyClass(metaclass=Combine):
     '''
     Документация должна быть здесь
     '''
+
     def method_2(self):
         '''
         Описание
         '''
         print("Что-то пошло не так")
+
     pass
 
 
