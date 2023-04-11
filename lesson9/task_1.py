@@ -21,7 +21,6 @@ class NameType:
         if type(value) != str:
             raise ValueError("Тип данных должен быть str")
         num_in_name = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
-        print(set(value))
         intersection = num_in_name.intersection(set(value))
         print('intersection = ', intersection)
         if len(intersection):
@@ -89,8 +88,8 @@ class BankAccount:
 
 
 ivan = Person('Иван', 25, 123456)
-stephan = Person('Степан215', 23, 6589) # Ошибка типа данных
+stephan = Person('Степан', 23, 6589)  # Ошибка типа данных
 ivan.age = 15
 
-ivan_bank_account = BankAccount(50000, 123456789, "123")  # Ошибка типа данных
+ivan_bank_account = BankAccount(50000, 123456789, "Ivan256")  # Ошибка типа данных
 stephan_bank_account = BankAccount(80000, 236547852, "Stephan")
