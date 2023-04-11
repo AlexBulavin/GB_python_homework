@@ -5,8 +5,8 @@ __author__ = 'Alex Bulavin'
 
 
 class PositiveNumber:
-    def __init__(self, incoming_attr):
-        self.incoming_attr = incoming_attr
+    # def __init__(self, incoming_attr):
+    #     self.incoming_attr = incoming_attr
 
     def __get__(self, instance, owner):  # Здесь
         # self - экземпляр класса PositiveNumber
@@ -26,14 +26,14 @@ class PositiveNumber:
     def __delete__(self, instance):
         del instance.__dict__[self.incoming_attr]
 
-    def __set_name__(self, owner, name):
-        self.name = name
+    def __set_name__(self, owner, incoming_attr):
+        self.incoming_attr = incoming_attr
 
 
 class Person:
-    age = PositiveNumber('age')  # Дескриптор = атрибут объекта со "связанным"
+    age = PositiveNumber()  # Дескриптор = атрибут объекта со "связанным"
     # поведением
-    phone = PositiveNumber('phone')
+    phone = PositiveNumber()
 
     def __init__(self, name, age, phone):
         self.name = name
@@ -42,15 +42,16 @@ class Person:
 
 
 class BankAccount:
-    balance = PositiveNumber('balance')
-    card_number = PositiveNumber('card_number')
+    balance = PositiveNumber()
+    card_number = PositiveNumber()
 
-    def __init__(self, balance):
+    def __init__(self, balance, card_number):
         self.balance = balance
+        self.card_number = card_number
 
 
 ivan = Person('Иван', 25, 123456)
-stephan = Person('Степан', 23, -6589)
+stephan = Person('Степан', 23, 6589)
 ivan.age = 15
 
 ivan_bank_account = BankAccount(50000, 123456789)
