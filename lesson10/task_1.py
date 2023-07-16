@@ -15,9 +15,19 @@
 --- '\u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430' - набор кодовых точек
 --- используйте списки и циклы, не дублируйте функции
 """
+<<<<<<< HEAD
 # слова в буквенном формате
 words = ['разработка', 'сокет', 'декоратор']
 
+=======
+import chardet
+# слова в буквенном формате
+words = ['разработка', 'сокет', 'декоратор']
+
+# преобразование слов в байтовые строки
+byte_words = [word.encode() for word in words]
+
+>>>>>>> Lesson10
 # преобразование слов в набор кодовых точек
 uni_words = []
 for word in words:
@@ -28,7 +38,13 @@ for word in words:
 
 # вывод типа и содержимого переменных
 for i, word in enumerate(words):
+<<<<<<< HEAD
     print(f'{word}: {type(word)}, {word}')
     print(f'{word} в наборе кодовых точек: '
+=======
+    word_type = chardet.detect(byte_words[i])['encoding']
+    print(f'{word}: {type(word)}, кодировка: {word_type}')
+    print(f'{word} в наборе кодовых точек в Unicode: '
+>>>>>>> Lesson10
           f'{type(uni_words[i])}, '
           f'{uni_words[i]}\n')
